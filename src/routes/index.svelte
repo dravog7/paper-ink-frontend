@@ -46,7 +46,7 @@ $: if($socketStore){
 				<Logo/>
 			<div class="mt-24">
 			<Button on:click={findMatch}>
-			<span class="font-alloy text-2xl text-black">{msg}</span>
+			<span class="font-alloy text-2xl">{msg}</span>
 			</Button>
 			</div>
 		</div>

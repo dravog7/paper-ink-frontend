@@ -6,6 +6,7 @@
 	src: 
 		url('AlloyInk.ttf') 
 		format('truetype');
+	font-display: swap;
 }
 .font-alloy{
     font-family: "AlloyInk",sans-serif;

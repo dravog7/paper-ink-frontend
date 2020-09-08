@@ -120,7 +120,7 @@ table td{
     background:#feb2b2;
 }
 .noone{
-    color: black;
+    color: white;
     background: white;
 }
 .unknown{
