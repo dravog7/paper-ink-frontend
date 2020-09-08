@@ -21,6 +21,7 @@ $:if($socketStore){
         }else{
             alert("You lost!")
         }
+            $socketStore.Winner=""
             goto("/")
     }
 }

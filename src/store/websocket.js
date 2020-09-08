@@ -76,6 +76,7 @@ function createWebSocket(){
     return {
         subscribe,
         ...methods,
+        set,
     }
 }
 
