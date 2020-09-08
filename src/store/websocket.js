@@ -2,8 +2,7 @@ import {writable} from "svelte/store"
 
 function createWebSocket(){
     if (typeof WebSocket === 'undefined') return;
-    const local = document.location.protocol.replace("http","ws")+"//"+document.location.hostname+":5000/ws"
-    const url = (process.env.NODE_ENV === 'development')?local:"wss://paper-ink.herokuapp.com/ws"
+    const url = "wss://paper-ink.herokuapp.com/ws"
 
     const { subscribe,set,update } = writable({
         Command:"",
@@ -30,8 +29,9 @@ function createWebSocket(){
         let data = JSON.parse(e.data)
         if(data.Command=="welcome"){
             data.inMatch = true
+            data.searching = false
         }
-        else if(data.Command=="finished"){
+        else if(data.Command=="finish"){
             data.inMatch = false
         }
         update(v=>{

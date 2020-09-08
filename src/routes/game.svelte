@@ -1,4 +1,5 @@
 <script>
+import { goto } from '@sapper/app';
 import Table from "../components/Table.svelte";
 import {socketStore} from "../store/websocket.js";
 
@@ -12,6 +13,16 @@ $: if($socketStore){
     ink= $socketStore.Ink||ink
     turn = ($socketStore.You==$socketStore.Next)?"Yes":"no"
     jsonS = JSON.stringify($socketStore)
+}
+$:if($socketStore){
+    if($socketStore.Winner){
+        if($socketStore.Winner==$socketStore.You){
+            alert("You won!")
+        }else{
+            alert("You lost!")
+        }
+            goto("/")
+    }
 }
 </script>
 
