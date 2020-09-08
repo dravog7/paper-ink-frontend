@@ -3,6 +3,7 @@ import {socketStore} from "../store/websocket.js";
 import Choose from "./Choose.svelte";
 export let h;
 export let w;
+
 let board = [];
 let You = ""
 let From = null

@@ -17,19 +17,24 @@ $: if($socketStore){
 $:if($socketStore){
     if($socketStore.Winner){
         if($socketStore.Winner==$socketStore.You){
-            alert("You won!")
+            show("You won!")
         }else{
-            alert("You lost!")
+            show("You lost!")
         }
-            $socketStore.Winner=""
-            goto("/")
+        $socketStore.Winner=null;
+        goto("/")
     }
+}
+async function show(arg){
+    alert(arg)
 }
 </script>
 
 <style>
 </style>
-
+<svelte:head>
+	<title>Match</title>
+</svelte:head>
 <div class="w-full h-full bg-black flex">
     <div
     class="m-auto bg-black flex flex-col rounded-lg"
@@ -38,7 +43,10 @@ $:if($socketStore){
     <span>Ink:<span>{ink}</span></span>
     <span>Turn:<span>{turn}</span></span>
     </div>
-    <div class="border-4 rounded-lg border-purple-300 flex"> <!--Change border color when its your turn-->
+    <div
+     class:border-purple-300={turn=='Yes'}
+     class:border-white={turn=='no'}
+     class="border-4 rounded-lg  flex"> <!--Change border color when its your turn-->
         <Table h=5 w=5/>
     </div>
     </div>

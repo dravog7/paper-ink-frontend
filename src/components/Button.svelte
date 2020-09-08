@@ -1,8 +1,8 @@
 <script>
 </script>
-<style>
+<style lang="text/postcss">
 div {
-    color: black;
+    @apply text-black;
     background: white;
     transition: all ease-in-out 0.5s;
     cursor: pointer!important;

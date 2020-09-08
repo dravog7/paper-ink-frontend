@@ -3,6 +3,8 @@ import replace from 'rollup-plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
+import svelte_preprocess_postcss from 'svelte-preprocess-postcss';
+import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
@@ -25,15 +27,21 @@ export default {
 			}),
 			svelte({
 				dev,
+				preprocess: {
+					style: svelte_preprocess_postcss(),
+				},
 				hydratable: true,
-				emitCss: true
+				emitCss: false,
+				css:true,
 			}),
 			resolve({
 				browser: true,
 				dedupe
 			}),
 			commonjs(),
-
+			postcss({
+				extract: true,
+			 }),
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
 				runtimeHelpers: true,
