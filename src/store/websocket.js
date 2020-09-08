@@ -70,6 +70,20 @@ function createWebSocket(){
                     searching:true,
                 }
             })
+        },
+        clear(){
+            update(v=>{
+                return {
+                    ...v,
+                    Winner:null,
+                    Board:{},
+                    Players:[],
+                    inMatch:false,
+                    searching:false,
+                    Command:"",
+                    Ink:"",
+                }
+            })
         }
     }
 
