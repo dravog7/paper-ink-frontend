@@ -1,9 +1,6 @@
 @font-face {
 	font-family: 'AlloyInk';
 	src: 
-		url('AlloyInk.otf') 
-		format('opentype');
-	src: 
 		url('AlloyInk.ttf') 
 		format('truetype');
 	font-display: swap;

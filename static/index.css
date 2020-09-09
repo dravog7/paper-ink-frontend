@@ -444,10 +444,6 @@ pre {
   border-width: 4px;
 }
 
-.border {
-  border-width: 1px;
-}
-
 .flex {
   display: flex;
 }

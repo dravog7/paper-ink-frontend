@@ -5,6 +5,8 @@ import Dialog from "../components/Dialog.svelte";
 import Button from "../components/Button.svelte";
 import {socketStore} from "../store/websocket.js";
 
+let flip = true
+
 function findMatch(){
 	if($socketStore){
 		if(!$socketStore.searching){
@@ -33,17 +35,21 @@ $: if($socketStore){
 </script>
 
 <style>
-
+.main-body{
+	@apply w-full h-full flex transition duration-500 ease-in-out;
+}
 </style>
 
 <svelte:head>
 	<title>Paper&Ink</title>
 </svelte:head>
 
-<div class="w-full h-full flex bg-white">
+<div class="main-body" class:bg-white={!flip} class:bg-black={flip}>
 	<Dialog>
-		<div class="m-auto flex flex-col justify-center content-between p-8">
+		<div class="m-auto flex flex-col justify-between p-8">
+			<div on:click={e=>{flip=!flip}} class="flex justify-center mx-auto">
 				<Logo/>
+			</div>
 			<div class="mt-24">
 			<Button on:click={findMatch}>
 			<span class="font-alloy text-2xl">{msg}</span>
