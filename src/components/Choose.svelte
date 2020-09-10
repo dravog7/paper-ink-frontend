@@ -14,6 +14,7 @@ export let ink;
     background:#d6bcfa;;
 }
 </style>
+<div class="text-gray-300 hidden">to prevent tailwind class purge</div>
 {#if resolve}
 <div class="font-alloy text-2xl text-black flex justify-between absolute inset-0" style="background:rgba(0,0,0,0.5)">
 <div class="m-auto bg-white flex dialog-container rounded-lg border-2 border-black">

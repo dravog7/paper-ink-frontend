@@ -122,6 +122,7 @@ table td{
     mix-blend-mode: difference;
 }
 </style>
+<div class="border-white hidden">tailwind css unpurge</div>
 <div class="font-alloy topbar text-lg flex justify-between w-full">
     <span>Ink:<span>{ink||0}</span></span>
     <span>Turn:<span>{(turn)?"Yes":"No"}</span></span>

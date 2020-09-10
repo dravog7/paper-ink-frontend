@@ -49,7 +49,7 @@ function sub(){
     @apply rounded-full text-3xl font-black z-10;
 }
 </style>
-
+<div class="opacity-0 hidden">to avoid tailwind class purge</div>
 <div class="m-auto w-full h-full overflow-hidden relative">
     <div class='absolute inset-0 flex items-center justify-between font-alloy lg:px-16'>
         <button aria-label="previous" class:opacity-0={selected<=0} class="left" on:click={sub}>&lt;</button>
