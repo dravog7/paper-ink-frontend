@@ -41,8 +41,7 @@ async function tdClick(i,j){
                 From = null
                 return
             }
-            board[i][j].Value = Number(val)
-            addMove(From,To)
+            addMove(From,To,Number(val))
             From = null
             To = null
             return
@@ -50,6 +49,10 @@ async function tdClick(i,j){
         From = [i,j]
         return
     }else{
+        if((From[0]==i)&&(From[1]==j)){
+            From = null
+            return
+        }
         if((cell.Owner==You)&&(cell.Value>0))
         return
         let dh = Math.abs(From[0]-i)
@@ -57,7 +60,7 @@ async function tdClick(i,j){
         if((dh>1)||(dw>1))
         return
         To=[i,j]
-        addMove(From,To)
+        addMove(From,To,0)
         From = null
         To = null
     }
@@ -150,4 +153,4 @@ class="border-4 rounded-lg flex  mx-auto"
         {/each}
     </table>
 </div>
-<Choose resolve={choice}/>
+<Choose resolve={choice} ink={ink}/>

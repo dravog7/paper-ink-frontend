@@ -22,12 +22,12 @@ let resetBoard = [
     [{Value:0,Owner:""},{Value:5,Owner:"b"},{Value:0,Owner:""},{Value:2,Owner:"b"},{Value:0,Owner:""}],
     [{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""}],
     [{Value:0,Owner:""},{Value:4,Owner:"b"},{Value:0,Owner:""},{Value:5,Owner:"b"},{Value:0,Owner:""}],
-    [{Value:2,Owner:"a"},{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:"a"},{Value:5,Owner:"a"}]
+    [{Value:2,Owner:"a"},{Value:0,Owner:""},{Value:0,Owner:""},{Value:3,Owner:"a"},{Value:3,Owner:"a"}]
 ];
 let board = lodash.cloneDeep(resetBoard)
 
-function addMove(From,To){
-    ink -=logic.addMove(board,From,To)
+function addMove(From,To,number){
+    ink -=logic.addMove(board,From,To,number)
     board = board
     checkFinish()
 }
@@ -69,6 +69,5 @@ function reset(){
     <div slot="right" class="w-full h-full flex flex-col text-black mt-4">
         <h1 class="text-center font-alloy text-2xl">Finish</h1>
         <p>Win the tutorial by erasing all red squares by attacking and defeating all enemy units.</p>
-        <p>(All tricks allowed)</p>
     </div>
 </Slide>

@@ -51,8 +51,25 @@ function createWebSocket(){
         })
     }
 
+    function convert_moves(moves){
+        let m = []
+        for(let i of moves){
+            if(!i.To){
+                i.To = i.From
+                i.From = [-1,-1]
+            }
+            m.push({
+                From:i.From,
+                To:i.To,
+                Number:i.Number,
+            })
+        }
+        return m
+    }
+
     const methods = {
         makeMove(moves){
+            convert_moves(moves)
             let com = {
                 Command:"move",
                 Moves:moves,
@@ -91,6 +108,7 @@ function createWebSocket(){
         subscribe,
         ...methods,
         set,
+        update,
     }
 }
 

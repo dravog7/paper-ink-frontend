@@ -2,7 +2,7 @@
 import { goto } from '@sapper/app';
 import Table from "../components/Table.svelte";
 import {socketStore} from "../store/websocket.js";
-
+import logic from "../components/gameLogic.js";
 let ink = 0
 let You = ""
 let Next = ""
@@ -15,9 +15,11 @@ let board = [
     [{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""},{Value:0,Owner:""}]
 ];
 let h=5,w=5;
+let moves = []
 
 $:if($socketStore){
-    ink = $socketStore.Ink||ink
+    console.log("store update")
+    ink = $socketStore.Ink||0
     turn = $socketStore.You==$socketStore.Next
     You = $socketStore.You
     Next = $socketStore.Next
@@ -42,6 +44,7 @@ $:if($socketStore){
 
 $: if($socketStore){
     if($socketStore.Board&&$socketStore.Board.Board){
+        console.log("socket change")
         h = $socketStore.Board.Board.length;
         if(h>0)
             w = $socketStore.Board.Board[0].length;
@@ -75,29 +78,41 @@ function makeBoard(h,w){
     }
 }
 
-function addMove(From,To){
-    let moves;
-    if(From&&To){
-        let number = Number(board[From[0]][From[1]].Value)
-        moves = [
-            {From:From,To:To,Number:number}
-        ]
-    }else if(From){
-        let number = Number(board[From[0]][From[1]].Value)
-        moves = [
-            {From:[-1,-1],To:From,Number:number}
-        ]
-    }else{
-        return
+function addMove(From,To,number){
+    let move = {
+        From:From,
+        To:To,
+        Number:number||board[From[0]][From[1]].Value,
+        FromVal:{Used:false,...board[From[0]][From[1]]},
+        ToVal:(To)?{Used:false,...board[To[0]][To[1]]}:null,
     }
-    socketStore.makeMove(moves)
+    let tmp = logic.addMove(board,From,To,number)
+    $socketStore.Ink -= tmp
+    board = board
+    moves.push(move)
     return
+}
+
+function submitMove(){
+    if(moves.length>0){
+        socketStore.makeMove(moves)
+        moves = []
+    }
+
+}
+function Undo(){
+    if(moves.length>0){
+        let move = moves.pop()
+        let tmp = logic.undo(board,move)
+        $socketStore.Ink += tmp
+        board = board
+    }
+
 }
 </script>
 
 <style>
 </style>
-
 <svelte:head>
 	<title>Match</title>
 </svelte:head>
@@ -108,5 +123,9 @@ function addMove(From,To){
     class="m-auto bg-black flex flex-col rounded-lg lg:w-4/12 w-9/12"
     >
         <Table board={board} You={You} Next={Next} ink={ink} addMove={addMove}/>
+        <div class="w-full flex justify-between font-alloy text-xl text-white p-4">
+        <div on:click={submitMove} class="cursor-pointer">Submit</div>
+        <div on:click={Undo} class="cursor-pointer">Undo</div>
+        </div>
     </div>
 </div>

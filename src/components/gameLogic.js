@@ -14,25 +14,18 @@ function fight(From,To){
         To.Owner = From.Owner
         To.Used = true
     }
-    else if(To.Value>0){
-        From.Value = 0
-        From.Used=true
-    }
     else{
         From.Value = 0
     }
     return {newFrom:From,newTo:To}
 }
 
-function addMove(board,From,To){
+function addMove(board,From,To,number){
     if((From)&&(!To)){
         //new unit spawn
-        let cell = board[From[0]][From[1]]
-        board[From[0]][From[1]]={
-            ...cell,
-            Used:true,
-        }
-        return cell.Value
+        board[From[0]][From[1]].Value = number
+        board[From[0]][From[1]].Used=true
+        return number
     }
     else if((From)&&(To)){
         let {newFrom,newTo} = fight(board[From[0]][From[1]],board[To[0]][To[1]])
@@ -42,7 +35,20 @@ function addMove(board,From,To){
     return 0
 }
 
+function undo(board,move){
+    let {From,To,FromVal,ToVal,Number} = move
+    board[From[0]][From[1]] = Object.assign(board[From[0]][From[1]],FromVal)
+    if(!To){
+        board[From[0]][From[1]].Value = 0
+        board[From[0]][From[1]].Used = false
+        return Number
+    }
+    board[To[0]][To[1]] = Object.assign(board[To[0]][To[1]],ToVal)
+    return 0
+}
+
 export default {
     fight,   
     addMove,
+    undo,
 }

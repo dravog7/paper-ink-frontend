@@ -26,8 +26,8 @@ let resetBoard = [
 ];
 let board = lodash.cloneDeep(resetBoard)
 
-function addMove(From,To){
-    ink -=logic.addMove(board,From,To)
+function addMove(From,To,number){
+    ink -=logic.addMove(board,From,To,number)
     board = board
     checkFinish()
 

@@ -26,8 +26,8 @@ let board = lodash.cloneDeep(resetBoard)
 let ink = 5;
 
 const dispatch = createEventDispatcher()
-function addMove(From,To){
-    let inkChange = logic.addMove(board,From,To)
+function addMove(From,To,number){
+    let inkChange = logic.addMove(board,From,To,number)
     board = board
     if(inkChange>0){
         ink -= inkChange
