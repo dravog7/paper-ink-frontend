@@ -6,10 +6,10 @@ function createWebSocket(){
 
     const { subscribe,set,update } = writable({
         Command:"",
-        Ink:"",
+        Ink:0,
         Ping:"",
-        You:"",
-        Next:"",
+        You:null,
+        Next:null,
         Board:{},
         Players:[],
         isOpen:false,

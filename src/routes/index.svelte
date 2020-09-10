@@ -15,6 +15,10 @@ function findMatch(){
 	}
 }
 
+function HowTo(){
+	goto("/howto")
+}
+
 let msg = 0;
 $: if($socketStore){
 	if($socketStore.searching){
@@ -36,7 +40,7 @@ $: if($socketStore){
 
 <style>
 .main-body{
-	@apply w-full h-full flex transition duration-500 ease-in-out;
+	@apply transition duration-500 ease-in-out;
 }
 </style>
 
@@ -44,15 +48,20 @@ $: if($socketStore){
 	<title>Paper&Ink</title>
 </svelte:head>
 
-<div class="main-body" class:bg-white={!flip} class:bg-black={flip}>
+<div class="main-body w-full h-full flex" class:bg-white={!flip} class:bg-black={flip}>
 	<Dialog>
 		<div class="m-auto flex flex-col justify-between p-8">
 			<div on:click={e=>{flip=!flip}} class="flex justify-center mx-auto">
 				<Logo/>
 			</div>
 			<div class="mt-24">
-			<Button on:click={findMatch}>
-			<span class="font-alloy text-2xl">{msg}</span>
+				<Button on:click={findMatch}>
+					<span class="font-alloy text-2xl">{msg}</span>
+				</Button>
+			</div>
+			<div class="mt-2">
+			<Button on:click={HowTo}>
+				<span class="font-alloy text-2xl">How To Play</span>
 			</Button>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
   "description": "TODO",
   "version": "0.0.1",
   "scripts": {
-    "dev": "sapper dev",
+    "dev": "npm run watch:tailwind&sapper dev",
     "watch:tailwind": "postcss static/tailwind.css -o static/index.css -w",
     "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/index.css",
     "build": "npm run build:tailwind && sapper build --legacy",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "compression": "^1.7.1",
+    "lodash": "^4.17.20",
     "polka": "next",
     "rollup-plugin-postcss": "^3.1.8",
     "sirv": "^0.4.0",
