@@ -6,7 +6,6 @@
 		let vh = window.innerHeight/100;
 		document.documentElement.style.setProperty("--vh",vh);
 	}
-
 </script>
 
 <style>
@@ -16,6 +15,7 @@ main{
 }
 </style>
 <svelte:window on:resize={changeVH}></svelte:window>
+
 <main class="w-screen flex">
 	<slot></slot>
 </main>

@@ -86,7 +86,7 @@ td:after {
   margin-top: 100%;
 }
 td span {
-    @apply absolute inset-0 flex justify-center flex-col cursor-default;
+    @apply absolute inset-0 flex justify-center flex-col cursor-default transition-all duration-500 ease-in-out;
 }
 table td{
     text-align: center;
@@ -115,7 +115,7 @@ table td{
     @apply text-transparent;
 }
 .used{
-    @apply text-gray-300;
+    @apply text-gray-100;
 }
 .topbar{
     @apply bg-transparent text-white;

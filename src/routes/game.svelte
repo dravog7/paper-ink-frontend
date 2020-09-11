@@ -17,8 +17,16 @@ let board = [
 let h=5,w=5;
 let moves = []
 
+async function timeout(ms){
+    await new Promise(resolve=>{
+        setTimeout(()=>{
+            console.log("timed out")
+            resolve()
+        },ms)
+    })
+}
+
 $:if($socketStore){
-    console.log("store update")
     ink = $socketStore.Ink||0
     turn = $socketStore.You==$socketStore.Next
     You = $socketStore.You
@@ -109,6 +117,11 @@ function Undo(){
     }
 
 }
+
+function goHome(){
+    socketStore.cancelMatch()
+    goto('/')
+}
 </script>
 
 <style>
@@ -116,7 +129,11 @@ function Undo(){
 <svelte:head>
 	<title>Match</title>
 </svelte:head>
-
+<div 
+    on:click={goHome} 
+    class="absolute cursor-pointer top-0 left-0 rounded-full p-2 text-black font-black font-alloy text-2xl z-40">
+    &lt; Home
+</div>
 <div class="hidden border-purple-300 border-white"></div>
 <div class="w-full h-full bg-black flex">
     <div

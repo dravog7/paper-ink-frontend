@@ -1,4 +1,5 @@
 <script>
+import { getContext ,onMount } from "svelte";
 import { goto } from '@sapper/app';
 import Slider from "../components/slider/slider.svelte";
 import Slide1 from "../components/HowTos/Slide1.svelte";
@@ -12,8 +13,12 @@ let data = [
     {component:Slide4},
 ]
 
+function gotoMod(url){
+	goto(url)
+}
+
 function goHome(){
-    goto("/")
+    gotoMod("/")
 }
 </script>
 

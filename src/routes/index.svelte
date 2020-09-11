@@ -7,8 +7,13 @@ import {socketStore} from "../store/websocket.js";
 
 let flip = true
 
+function gotoMod(url){
+	goto(url)
+}
+
+
 function findMatch(){
-	if($socketStore){
+	if($socketStore&&$socketStore.isOpen){
 		if(!$socketStore.searching){
 			socketStore.findMatch()
 		}
@@ -16,23 +21,25 @@ function findMatch(){
 }
 
 function HowTo(){
-	goto("/howto")
+	gotoMod("/howto")
 }
 
-let msg = 0;
+let msg = "";
 $: if($socketStore){
-	if($socketStore.searching){
+	if($socketStore.failed){
+		msg="Cant Connect"
+	}else if(!$socketStore.isOpen){
+		msg="Connecting..."
+	}else if($socketStore.searching){
 		msg = "searching..."
 	}else{
 		msg = "find Match"
 	}
-}else{
-	msg="Connecting..."
 }
 
 $: if($socketStore){
 	if($socketStore.inMatch){
-		goto('/game');
+		gotoMod('/game');
 	}
 }
 

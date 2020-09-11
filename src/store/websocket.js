@@ -15,6 +15,7 @@ function createWebSocket(){
         isOpen:false,
         inMatch:false,
         searching:false,
+        failed:false,
     })
     let socket = new WebSocket(url)
     socket.onopen=function(e){
@@ -25,8 +26,17 @@ function createWebSocket(){
             }
         })
     }
+    socket.onerror = function(e){
+        update(v=>{
+            return {
+                ...v,
+                failed:true,
+            }
+        })
+    }
     socket.onmessage = function(e){
         let data = JSON.parse(e.data)
+        console.log(data.Board)
         if(data.Command=="welcome"){
             data.inMatch = true
             data.searching = false
@@ -87,6 +97,18 @@ function createWebSocket(){
                     searching:true,
                 }
             })
+        },
+        cancelSearch(){
+            let com = {
+                Command:"cancelSearch",
+            }
+            socket.send(JSON.stringify(com))
+        },
+        cancelMatch(){
+            let com = {
+                Command:"cancelMatch",
+            }
+            socket.send(JSON.stringify(com))
         },
         clear(){
             update(v=>{
