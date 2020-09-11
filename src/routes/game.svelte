@@ -129,15 +129,15 @@ function goHome(){
 <svelte:head>
 	<title>Match</title>
 </svelte:head>
-<div 
+<!-- <div 
     on:click={goHome} 
-    class="absolute cursor-pointer top-0 left-0 rounded-full p-2 text-black font-black font-alloy text-2xl z-40">
+    class="absolute cursor-pointer top-0 left-0 rounded-full p-2 text-white font-black font-alloy text-2xl z-40">
     &lt; Home
-</div>
+</div> -->
 <div class="hidden border-purple-300 border-white"></div>
 <div class="w-full h-full bg-black flex">
     <div
-    class="m-auto bg-black flex flex-col rounded-lg lg:w-4/12 w-9/12"
+    class="m-auto bg-black flex flex-col rounded-lg lg:w-4/12 sm:w-6/12 w-8/12"
     >
         <Table board={board} You={You} Next={Next} ink={ink} addMove={addMove}/>
         <div class="w-full flex justify-between font-alloy text-xl text-white p-4">
