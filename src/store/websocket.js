@@ -1,4 +1,6 @@
 import {writable} from "svelte/store"
+import logic from "../components/gameLogic.js"
+import { timeout } from "../components/utils.js"
 
 function createWebSocket(){
     if (typeof WebSocket === 'undefined') return;
@@ -34,14 +36,31 @@ function createWebSocket(){
             }
         })
     }
-    socket.onmessage = function(e){
+    async function animateMove(From,To,number){
+        update(v=>{
+                logic.addMove(v.Board.Board,From,To,number)
+                v.Board.Board = v.Board.Board;
+            return v
+        })
+        await timeout(600)
+    }
+    socket.onmessage = async function(e){
         let data = JSON.parse(e.data)
-        console.log(data.Board)
+        console.log(data)
         if(data.Command=="welcome"){
             data.inMatch = true
             data.searching = false
-        }
-        else if(data.Command=="finish"){
+        }else if(data.Command=="update"){
+            if(data.Board.Fight){
+                for(let i of data.Board.Fight){
+                    let From = i.AttackLocation
+                    let To = i.DefenceLocation
+                    let number = i.Attack
+                    if(i.Attacker!=data.You)
+                        await animateMove(From,To,number)
+                }
+            }
+        }else if(data.Winner!=""){
             data.inMatch = false
         }
         update(v=>{

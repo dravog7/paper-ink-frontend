@@ -24,7 +24,7 @@ function HowTo(){
 	gotoMod("/howto")
 }
 
-let msg = "";
+let msg = "Connecting...";
 $: if($socketStore){
 	if($socketStore.failed){
 		msg="Cant Connect"
