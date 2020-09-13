@@ -51,7 +51,7 @@ function createWebSocket(){
             data.inMatch = true
             data.searching = false
         }else if(data.Command=="update"){
-            if(data.Board.Fight){
+            if((data.Board)&&(data.Board.Fight)){
                 for(let i of data.Board.Fight){
                     let From = i.AttackLocation
                     let To = i.DefenceLocation
