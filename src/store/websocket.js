@@ -42,7 +42,7 @@ function createWebSocket(){
                 v.Board.Board = v.Board.Board;
             return v
         })
-        await timeout(600)
+        await timeout(800)
     }
     socket.onmessage = async function(e){
         let data = JSON.parse(e.data)
